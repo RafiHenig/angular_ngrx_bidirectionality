@@ -1,0 +1,34 @@
+{
+  "dir": "rtl",
+  "languages": [{
+      "code": "en",
+      "name": "English"
+    },
+    {
+      "code": "he",
+      "name": "עברית"
+    }
+  ],
+  "login": {
+    "email": {
+      "label": "דואר אלקטרוני",
+      "placeholder": "הכנס דואר אלקטרוני",
+      "errors": {
+        "required": "דואר אלקטרוני הינו שדה חובה.",
+        "email": "הכנס דואר אלקטרונית חוקית."
+      }
+    },
+    "passward": {
+      "label": "סיסמא",
+      "placeholder": "הכנס סיסמא",
+      "errors": {
+        "required": "סיסמא הינה שדה חובה",
+        "minlength": "סיסמא חייבת להכיל לפחות 8 אותיות."
+      }
+    },
+    "rememberMe": "זכור אותי",
+    "forgatPassward": "שכחת את הסיסמא?",
+    "invalidForm": "אחד מהשדות חסר או אינו חוקי",
+    "login": "כניסה"
+  }
+}

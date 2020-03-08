@@ -1,0 +1,57 @@
+<ng-progress [spinner]="false"></ng-progress>
+
+
+<form tabindex="1" [formGroup]="formGroup" (keydown.enter)="submit()">
+
+  <small class="async-error-message" [@fade] *ngIf="asyncErrorMessage">{{asyncErrorMessage}}</small>
+
+  <div class="logo">
+    <img src="../../../../assets/OneCard-logo.png">
+  </div>
+
+  <mat-form-field>
+    <mat-label>{{"login.email.label" | translate}}</mat-label>
+    <input formControlName="email" type="text" name="email" matInput
+      [placeholder]='"login.email.placeholder" | translate'>
+    <button type="button" matSuffix mat-icon-button *ngIf="email.value" (click)="emailValue = '';">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error type="button" *ngIf="email.hasError('required')">{{"login.email.errors.required" | translate}}
+    </mat-error>
+    <mat-error type="button" *ngIf="email.hasError('email')">{{"login.email.errors.email" | translate}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{"login.passward.label" | translate}}</mat-label>
+    <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <button type="button" mat-button *ngIf="password.value" matSuffix mat-icon-button (click)="passwordValue = ''">
+      <mat-icon>close</mat-icon>
+    </button>
+    <input formControlName="password" type="password" name="password" autocomplete="off" matInput
+      [placeholder]='"login.passward.placeholder" | translate' [type]="hide ? 'password' : 'text'">
+    <mat-error *ngIf="password.hasError('required')">{{"login.passward.errors.required" | translate}}</mat-error>
+    <mat-error *ngIf="password.hasError('minlength')">{{"login.passward.errors.minlength" | translate}}</mat-error>
+  </mat-form-field>
+
+  <div class="remember-restore">
+    <mat-checkbox formControlName="rememberMe" color="primary">{{"login.rememberMe" | translate}}</mat-checkbox>
+    <a routerLink="/reset-password">{{"login.forgatPassward" | translate}}</a>
+  </div>
+
+  <div class="button-wrapper"
+    [matTooltip]="(asyncErrorMessage || formGroup.invalid) ?  ('login.invalidForm' | translate) : ''">
+    <button class="login" [disabled]="asyncErrorMessage || formGroup.invalid || isLoading" mat-raised-button
+      (click)="submit()" color="primary">{{"login.login" | translate}}</button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>{{currentLang}}</mat-label>
+    <mat-select (selectionChange)="changeLanguage($event)">
+      <mat-option *ngFor="let lang of languages" [(value)]="lang.code">
+        {{lang.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

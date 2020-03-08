@@ -1,0 +1,40 @@
+
+@import "../../../../theme/mixins/host.scss";
+@import "../../../../theme/mixins/flex.scss";
+@import "../../../../theme/variables.scss";
+
+:host {
+  background: $secondary;
+
+  .logo {
+    @include flex(null, center, center);
+    height: 90px;
+    padding-top: 8px;
+
+    img {
+      width: 60%;
+    }
+  }
+
+  mat-nav-list {
+    border-bottom: solid 1px $item-devider-color;
+
+    .dir {
+      color: $primary;
+      border-top: solid 1px $item-devider-color;
+    }
+
+    .pages {
+      overflow: hidden;
+
+      mat-list-item {
+        color: $tertiary;
+      }
+    }
+
+    .item-text {
+      padding: 0 10px;
+      overflow: hidden !important;
+    }
+  }
+}

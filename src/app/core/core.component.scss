@@ -1,0 +1,6 @@
+@import '../theme/mixins/host.scss';
+
+div {
+  @include host(100vh, 100vw, block);
+  overflow-x: hidden !important;
+}

@@ -1,0 +1,17 @@
+@mixin resize-mat-icon-button($number : 0) {
+
+  @if($number > 0) {
+    .mat-icon-button {
+      width: #{$number}px;
+      height: #{$number}px;
+      line-height: #{$number}px;
+
+      .mat-icon {
+        font-size: #{$number - 12}px;
+        width: #{$number - 12}px;
+        height: #{$number - 12}px;
+        line-height: #{$number - 12}px;
+      }
+    }
+  }
+}

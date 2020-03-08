@@ -1,0 +1,19 @@
+@import '../../../theme/mixins/host.scss';
+
+:host {
+  @include host(100vh, 100vw);
+
+
+}
+
+// ::ng-deep ng-progress {
+//   .ng-progress-bar.-active {
+//     .ng-bar-placeholder {
+//       background: #8BC34A !important;
+
+//       .ng-bar {
+//         background: white !important;
+//       }
+//     }
+//   }
+// }

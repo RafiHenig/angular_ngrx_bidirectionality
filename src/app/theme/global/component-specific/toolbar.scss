@@ -1,0 +1,37 @@
+@import '../../variables.scss';
+@import '../../customs/resizable-mat-icon-button.scss';
+
+mat-toolbar {
+
+  height: $toolbar-height !important;
+  min-height: unset !important;
+
+  .mat-toolbar-row {
+    height: inherit;
+    padding: 0 !important;
+    background-color: $primary;
+    color: $secondary;
+    @include resize-mat-icon-button(35);
+
+    .toggle-menu-visibility {
+      width: 47px;
+      height: 100%;
+      border-radius: 0 !important;
+      background: #bc8aa7;
+    }
+
+    .toggle-menu-width {
+      margin: 0 4px
+    }
+
+    h2 {
+      padding: 4px 4px 0 4px;
+    }
+
+    .menu-button {
+      margin: 0 3px;
+      border: solid 1px #c294ae;
+    }
+
+  }
+}

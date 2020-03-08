@@ -1,0 +1,22 @@
+@import '../../variables.scss';
+
+mat-sidenav-container {
+  height: calc(100% - #{$toolbar-height});
+
+  .mat-drawer-backdrop {
+    height: 100%;
+  }
+
+  mat-sidenav {
+    width: 300px; // initial value so it won't be animated when page is first shown
+
+    .mat-drawer-inner-container {
+      overflow-x: hidden !important;
+
+      .mat-list-item-content {
+        padding: 0 12px !important;
+      }
+
+    }
+  }
+};

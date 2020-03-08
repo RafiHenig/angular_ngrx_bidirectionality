@@ -1,0 +1,46 @@
+@mixin host($hight : null,
+  $width : null,
+  $display: null,
+  $postion: null,
+  $overflow-y: null,
+  $overflow-x: null,
+  $box-sizing: null,
+  $padding:null,
+  $background:null) {
+
+  @if $hight {
+    height: $hight;
+  }
+
+  @if $width {
+    width: $width;
+  }
+
+  @if $display {
+    display: $display;
+  }
+
+  @if $overflow-y {
+    overflow-y: $overflow-y;
+  }
+
+  @if $overflow-x {
+    overflow-x: $overflow-x;
+  }
+
+  @if $box-sizing {
+    box-sizing: $box-sizing;
+  }
+
+  @if $postion {
+    position: $postion;
+  }
+
+  @if $padding {
+    padding: $padding;
+  }
+
+  @if $background {
+    background: $background;
+  }
+}

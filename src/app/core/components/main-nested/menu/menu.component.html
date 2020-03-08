@@ -1,0 +1,34 @@
+<div class="logo">
+  <img src="../../../../../assets/OneCard-logo.png" />
+</div>
+
+<mat-nav-list>
+  <ng-container *ngFor="let dir of directories">
+
+    <mat-list-item class="dir"  
+     [matTooltip]="dir.title" (click)="opendDir = opendDir == dir ? null : dir ; dissmissSideNavIfSmall(dir)">
+
+      <mat-icon>{{dir.icon}}</mat-icon>
+
+      <span class="item-text spacer" [@shrinkExtendMenuLink]="showLinkText ? 'show' : 'hide'">{{ dir?.title }} </span>
+
+      <mat-icon i18n="show more icon @@showMoreIcon" 
+        [@rotation]="dir == opendDir ? 'open' : 'close'" [@shrinkExtendMenuLink]="showLinkText ? 'show' : 'hide'">
+        arrow_forward
+      </mat-icon>
+
+    </mat-list-item>
+
+    <div class="pages" *ngIf='dir == opendDir' @revealSubPages>
+
+      <mat-list-item mat-list-item [routerLink]="subPage.route" routerLinkActive="active"
+        *ngFor="let subPage of dir.pages" (click)="dissmissSideNavIfSmall(subPage)" [matTooltip]="subPage.title">
+        <mat-icon>{{subPage?.icon}}</mat-icon>
+
+        <span class="item-text" [@shrinkExtendMenuLink]="showLinkText ? 'show' : 'hide'">{{ subPage?.title }} </span>
+
+      </mat-list-item>
+    </div>
+
+  </ng-container>
+</mat-nav-list>

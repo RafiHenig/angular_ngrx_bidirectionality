@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="shrinkMenuIcon" datatype="html">
+        <source>arrow_backward</source>
+        <target>arrow_forward</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/components/main/main.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description"> change to backForward when RTL </note>
+        <note priority="1" from="meaning">toggle icon mode </note>
+      </trans-unit>
+      <trans-unit id="showMoreIcon" datatype="html">
+        <source>
+        arrow_forward
+      </source>
+      <target>
+        arrow_backward
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/components/main-nested/menu/menu.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description">show more icon </note>
+      </trans-unit>
+       <trans-unit id="2547756348530497105">
+          <source>ltr</source>
+          <target>rtl</target>
+     </trans-unit>
+    </body>
+  </file>
+</xliff>

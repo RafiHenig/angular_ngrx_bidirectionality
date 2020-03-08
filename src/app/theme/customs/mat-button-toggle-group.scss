@@ -1,0 +1,20 @@
+@mixin mat-button-toggle-group {
+  mat-button-toggle-group {
+    margin-left: unset !important;
+    border-radius: 50px;
+    height: 35px;
+
+    mat-button-toggle {
+      @include flex(null, null, center);
+
+      .mat-button-toggle-label-content {
+        @include font(null, 15px, null, null, 30px)
+      }
+
+      &.mat-button-toggle-checked {
+        background-color: $primary;
+        color: white;
+      }
+    }
+  }
+}

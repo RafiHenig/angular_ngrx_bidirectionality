@@ -1,0 +1,45 @@
+@import '../../mixins/flex.scss';
+
+.nav-menu {
+  max-width: unset !important;
+
+  .mat-menu-content {
+    width: 300px;
+
+    .user {
+      @include flex(column, null, center);
+      margin: 20px 33px;
+      padding: 0 10px;
+
+      .user-icon {
+        @include flex(null, center, center);
+        color: $secondary;
+        background: $primary;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        font-size: 45px;
+        margin-bottom: 10px;
+      }
+
+      .user-info {
+        text-align: center;
+
+        h2 {
+          color: $black-text;
+          letter-spacing: .29px;
+          margin: 0;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        p {
+          color: $gray-text;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+
+    }
+  }
+}

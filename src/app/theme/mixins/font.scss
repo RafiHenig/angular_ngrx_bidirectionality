@@ -1,0 +1,10 @@
+@mixin font($font-family : false, $size: false, $colour: false, $weight: false, $line-height: false, $letter-spacing :false) {
+    //font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    @if $font-family { font-family: unquote($font-family); }
+    @if $size { font-size: $size; }
+    @if $colour { color: $colour; }
+    @if $weight { font-weight: $weight; }
+    @if $line-height { line-height: $lh; }
+    @if $letter-spacing { letter-spacing : $letter-spacing ; }
+}
+

@@ -17,11 +17,13 @@
   }
 
   mat-nav-list {
-    border-bottom: solid 1px $item-devider-color;
+    //border-bottom: solid 1px $item-devider-color;
+    border-bottom: solid 5px $gray-background;
 
     .dir {
       color: $primary;
-      border-top: solid 1px $item-devider-color;
+      //border-top: solid 1px $item-devider-color;
+      border-top: solid 5px $gray-background;
     }
 
     .pages {

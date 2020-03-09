@@ -1,28 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../../../shared/global/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpStatusCode } from '../../../shared/global/enums/httpError.enum';
 import { fade } from '../../../shared/global/animations/fade.animation';
-import { TranslateService } from '@ngx-translate/core';
-import { Language } from '../../../shared/global/vms/lanugage';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { MatSelectChange } from '@angular/material/select';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { revealVertically } from '../../animations/reveal-rertically.animation';
+import { takeWhile, takeUntil } from 'rxjs/operators';
+import { Language } from '../../../shared/global/vms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   animations: [
-    fade
+    fade,
+    revealVertically
   ]
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit, OnDestroy {
+  private readonly distroy$ : Subject<boolean> = new Subject<boolean>();
   public asyncErrorMessage?: string = undefined;
   public formGroup: FormGroup;
   public hide: boolean = true;
   public isLoading: boolean = false;
+  public showLanguageSelectionMenu: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +35,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   public languages: Language[] = [];
-  public currentLang: string;
+  public currentLanguage: Language;
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
@@ -40,12 +44,12 @@ export class LoginComponent implements OnInit {
       rememberMe: [false]
     });
 
-    this.translate.get('languages').subscribe((x: Language[]) => {
+    this.translate.get('languages').pipe(takeUntil(this.distroy$)).subscribe((x: Language[]) => {
       this.languages = x;
-      this.currentLang = x.find(x => x.code == this.translate.currentLang)?.name
+      this.currentLanguage = this.languages.find(y => y.code == this.translate.currentLang)
     });
-
-    this.formGroup.valueChanges.subscribe(() => this.asyncErrorMessage = undefined);
+    this.translate.onLangChange.pipe(takeUntil(this.distroy$)).subscribe((x: LangChangeEvent) => this.currentLanguage = this.languages.find(y => y.code == x.lang))
+    this.formGroup.valueChanges.pipe(takeUntil(this.distroy$)).subscribe(() => this.asyncErrorMessage = undefined);
   }
 
   get password(): FormControl { return this.formGroup.get('password') as FormControl; }
@@ -53,7 +57,9 @@ export class LoginComponent implements OnInit {
   set passwordValue(value: string) { this.formGroup.get('password').setValue(value); }
   set emailValue(value: string) { this.formGroup.get('email').setValue(value); }
 
-  public changeLanguage = (x: MatSelectChange): Observable<any> => this.translate.use(x.value);
+  public changeLanguage = (x: Language): Observable<any> => {
+   return  this.translate.use(x.code);
+  }
 
   submit = (): void => {
     if (this.formGroup.invalid) return;
@@ -70,5 +76,10 @@ export class LoginComponent implements OnInit {
           }
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.distroy$.next(true);
+    this.distroy$.unsubscribe();
   }
 }

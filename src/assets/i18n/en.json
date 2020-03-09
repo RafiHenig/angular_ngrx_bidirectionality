@@ -9,6 +9,12 @@
       "name": "עברית"
     }
   ],
+  "symbols": {
+    "arrow": {
+      "forward": "arrow_forward",
+      "back": "arrow_back"
+    }
+  },
   "login": {
     "email": {
       "label": "Email",
@@ -30,5 +36,12 @@
     "forgatPassward": "Forgat passward?",
     "invalidForm": "There is one or more missing or invalid required fields.",
     "login": "Sign in"
+  },
+  "toolbar": {
+    "accountMenu": {
+      "language":"Language",
+      "notifications": "Notifications",
+      "logout": "Loutout"
+    }
   }
 }

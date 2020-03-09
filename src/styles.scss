@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 body {
@@ -9,14 +10,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
+*{
+  box-sizing: border-box;
+}
 
 .spacer {
   flex: 1 1 auto;
 }
-
-
-
 
 
 

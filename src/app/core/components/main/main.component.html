@@ -1,59 +1,6 @@
 <ng-progress [spinner]="false"></ng-progress>
-<mat-toolbar>
-  <mat-toolbar-row *ngSubscribeTo="userStore | async as user">
 
-    <button class="toggle-menu-visibility" mat-icon-button (click)="sideNavService.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-
-    <button class="toggle-menu-width" *ngIf="!(layoutService.isSmall$ | async)" mat-icon-button
-      (click)="sideNavService.toggleWidth()">
-      <mat-icon [@rotation]='(sideNavService.isFullWidth$ | async) ? "close" : "open"'
-        i18n="toggle icon mode | change to backForward when RTL @@shrinkMenuIcon">arrow_backward</mat-icon>
-    </button>
-
-    <h2>{{navTitleService.tilte$ | async}}</h2>
-
-    <span class="spacer"></span>
-
-    <div class="user-actions">
-      <button class="menu-button" mat-icon-button (click)="changeLanugage('he')">
-        he
-      </button>
-       <button class="menu-button" mat-icon-button (click)="changeLanugage('en')">
-       en
-      </button>
-
-      <button class="menu-button" mat-icon-button [matMenuTriggerFor]="menu">
-        {{user?.username?.toUpperCase().charAt(0)}}
-      </button>
-
-      <mat-menu class="nav-menu" #menu="matMenu">
-        <div class="user">
-          <div class="user-icon">{{user?.username?.toUpperCase().charAt(0)}}</div>
-          <div class="user-info">
-            <h2>{{user?.username}}</h2>
-            <p>{{user?.email}}</p>
-          </div>
-        </div>
-
-        <mat-divider></mat-divider>
-
-        <button mat-menu-item (click)="authService.logOut()">
-          <mat-icon>exit_to_app</mat-icon>
-          <span>התנתק</span>
-        </button>
-
-
-        <button mat-menu-item>
-          <mat-icon>notifications</mat-icon>
-          <span> התראות</span>
-        </button>
-      </mat-menu>
-    </div>
-
-  </mat-toolbar-row>
-</mat-toolbar>
+<app-toolbar></app-toolbar>  
 
 <mat-sidenav-container>
   
@@ -64,7 +11,9 @@
   </mat-sidenav>
 
   <mat-sidenav-content 
-    [@shrinkExtendContent]="(layoutService.isSmall$ | async) ? 'close' : (sideNavService.isOpen$ | async) ? (sideNavService.isFullWidth$ | async) ? 'extended' : 'open' : 'close'">
+    [@shrinkExtendContentRTL]="(layoutService.isSmall$ | async) || directionality.value =='ltr' ? 'close' : (sideNavService.isOpen$ | async) ? (sideNavService.isFullWidth$ | async) ? 'extended' : 'open' : 'close'"
+    [@shrinkExtendContentLTR]="(layoutService.isSmall$ | async) || directionality.value =='rtl' ? 'close' : (sideNavService.isOpen$ | async) ? (sideNavService.isFullWidth$ | async) ? 'extended' : 'open' : 'close'">
     <app-content></app-content>
   </mat-sidenav-content>
+  
 </mat-sidenav-container>

@@ -11,10 +11,11 @@ import { MenuComponent } from './components/main-nested/menu/menu.component';
 import { StoreModule } from '../shared/store/store.module';
 import { LoginComponent } from './components/login/login.component';
 import { CanActivateCoreGuard } from './services/can-activate.guard';
+import { ToolbarComponent } from './components/main-nested/toolbar/toolbar.component';
 
 
 @NgModule({
-  declarations: [CoreComponent, MainComponent, ContentComponent, MenuComponent, LoginComponent],
+  declarations: [CoreComponent, MainComponent, ContentComponent, MenuComponent, LoginComponent, ToolbarComponent],
   exports: [
     CoreComponent
   ],

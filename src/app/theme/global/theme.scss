@@ -1,6 +1,36 @@
+$primary-pink: (50: #f4ecf0,
+  100: #e3ceda,
+  200: #d0aec2,
+  300: #bd8ea9,
+  400: #af7596,
+  500: #a15d84,
+  600: #99557c,
+  700: #8f4b71,
+  800: #854167,
+  900: #743054,
+  A100: #ffbee0,
+  A200: #ff8bc7,
+  A400: #ff58ae,
+  A700: #ff3fa2,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
 
-// @import '~@angular/material/theming';
-// // Plus imports for other components in your app.
 
+@import '~@angular/material/theming';
+@include mat-core();
 
-// @include mat-core();
+$pink-theme: mat-light-theme(mat-palette($primary-pink), mat-palette($mat-red));
+@include angular-material-theme($pink-theme);

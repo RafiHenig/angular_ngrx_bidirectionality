@@ -1,8 +1,8 @@
-@import '../../variables.scss';
-@import '../../customs/resizable-mat-icon-button.scss';
+@import '../../../../theme/variables.scss';
+@import '../../../../theme/customs/resizable-mat-icon-button.scss';
+@import '../../../../theme/mixins/flex.scss';
 
 mat-toolbar {
-
   height: $toolbar-height !important;
   min-height: unset !important;
 
@@ -17,7 +17,7 @@ mat-toolbar {
       width: 47px;
       height: 100%;
       border-radius: 0 !important;
-      background: #bc8aa7;
+      background: $light-primary;
     }
 
     .toggle-menu-width {
@@ -28,10 +28,9 @@ mat-toolbar {
       padding: 4px 4px 0 4px;
     }
 
-    .menu-button {
-      margin: 0 3px;
-      border: solid 1px #c294ae;
+    button.account-info-switch {
+      margin: 0 4px;
+      background-color: $light-primary;
     }
-
   }
 }

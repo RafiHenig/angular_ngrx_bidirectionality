@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { SideNavService } from '../../../../shared/global/services/sidenav.service';
 import { LayoutService } from '../../../../shared/global/services/layout.service';
-import { first } from 'rxjs/operators';
-import { UserStore } from '../../../../shared/store/stores/models/user.store';
-import { revealSubPages } from '../../../animations/reveal-sub-page.animation';
 import { shrinkExtendMenuLink } from '../../../animations/shrink-extend-menu-link.animation';
-import { rotation, dirRotation } from '../../../../shared/global/animations/rotation.animation';
+import { rotationClockWise,rotationCounterClockWise} from '../../../../shared/global/animations/rotation.animation';
 import { Page, Directory } from '../../../../shared/global/vms';
+import { revealVertically } from '../../../animations/reveal-rertically.animation';
+import { Directionality } from '@angular/cdk/bidi';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   animations: [
-    revealSubPages,
+    revealVertically,
     shrinkExtendMenuLink,
-    dirRotation(90)
+    rotationClockWise(90),
+    rotationCounterClockWise(90)
   ]
 })
 export class MenuComponent implements OnInit {
@@ -57,10 +57,11 @@ export class MenuComponent implements OnInit {
     },
   ];
 
-  constructor(public sideNavService: SideNavService, public layoutService: LayoutService) { }
+  constructor(public sideNavService: SideNavService, public layoutService: LayoutService, public directionality : Directionality) { }
 
   ngOnInit() {
     this.sideNavService.isFullWidth$.subscribe(x => x ? setTimeout(() => this.showLinkText = x, 0) : this.showLinkText = x);
+    this.directionality.value
   }
 
   public toggleWidth = (): void => this.sideNavService.toggleWidth();
@@ -69,5 +70,5 @@ export class MenuComponent implements OnInit {
     if (x.route && this.layoutService.isSmall) this.sideNavService.toggle();
   };
 
- // public resetSelection = (name: string): void => this.pages.filter(x => x.name !== name).forEach(x => x.opened = false)
+  // public resetSelection = (name: string): void => this.pages.filter(x => x.name !== name).forEach(x => x.opened = false)
 }

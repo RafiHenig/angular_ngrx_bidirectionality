@@ -12,16 +12,10 @@ import { AuthService } from './services/auth.service';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BidiModule } from '@angular/cdk/bidi';
-
-import { InjectionToken } from '@angular/core';
-import { Dir } from './enums/dir.enum';
 import { NgSubscribeToDirective } from './directives/subscribe-to.directive';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 export const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
-export const dir: Dir = ($localize`ltr` == 'ltr') ? Dir.LTR : Dir.RTL;
-export const APP_DIR = new InjectionToken<Dir>('app.dir');
-
-
 
 @NgModule({
   declarations: [NgSubscribeToDirective],
@@ -51,11 +45,12 @@ export const APP_DIR = new InjectionToken<Dir>('app.dir');
     SideNavService,
     NavTitleService,
     AuthService,
-    {
-      provide: APP_DIR,
-      useValue: dir
-    }
   ]
 
 })
-export class GlobalModule { }
+export class GlobalModule { 
+  // constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+  //   matIconRegistry.addSvgIcon('user', domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/user.svg'));
+  //   matIconRegistry.addSvgIcon('language', domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/language.svg'));
+  // }
+}

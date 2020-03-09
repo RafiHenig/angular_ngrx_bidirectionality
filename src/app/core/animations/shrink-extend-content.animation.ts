@@ -1,12 +1,12 @@
 import { trigger, transition, animate, style, state, AnimationTriggerMetadata } from '@angular/animations';
 
 export const shrinkExtendContentRTL = trigger('shrinkExtendContentRTL', [
-  state('closed',
+  state('close',
     style({
       'margin-right': '0',
     })
   ),
-  state('opened',
+  state('open',
     style({
       'margin-right': '48px'
     })
@@ -20,12 +20,12 @@ export const shrinkExtendContentRTL = trigger('shrinkExtendContentRTL', [
 ]);
 
 export const shrinkExtendContentLTR = trigger('shrinkExtendContentLTR', [
-  state('closed',
+  state('close',
     style({
       'margin-left': '0',
     })
   ),
-  state('opened',
+  state('open',
     style({
       'margin-left': '48px'
     })

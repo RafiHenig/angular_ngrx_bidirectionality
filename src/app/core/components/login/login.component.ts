@@ -5,11 +5,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { HttpStatusCode } from '../../../shared/global/enums/httpError.enum';
 import { fade } from '../../../shared/global/animations/fade.animation';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { MatSelectChange } from '@angular/material/select';
 import { Observable, Subject } from 'rxjs';
-import { revealVertically } from '../../animations/reveal-rertically.animation';
-import { takeWhile, takeUntil } from 'rxjs/operators';
+import {  takeUntil } from 'rxjs/operators';
 import { Language } from '../../../shared/global/vms';
+import { revealVertically } from '../../../shared/global/animations/reveal-rertically.animation';
 
 @Component({
   selector: 'app-login',

@@ -2,10 +2,10 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { SideNavService } from '../../../../shared/global/services/sidenav.service';
 import { LayoutService } from '../../../../shared/global/services/layout.service';
 import { shrinkExtendMenuLink } from '../../../animations/shrink-extend-menu-link.animation';
-import { rotationClockWise,rotationCounterClockWise} from '../../../../shared/global/animations/rotation.animation';
+import { rotationClockWise, rotationCounterClockWise } from '../../../../shared/global/animations/rotation.animation';
 import { Page, Directory } from '../../../../shared/global/vms';
-import { revealVertically } from '../../../animations/reveal-rertically.animation';
 import { Directionality } from '@angular/cdk/bidi';
+import { revealVertically } from '../../../../shared/global/animations/reveal-rertically.animation';
 
 @Component({
   selector: 'app-menu',
@@ -57,7 +57,7 @@ export class MenuComponent implements OnInit {
     },
   ];
 
-  constructor(public sideNavService: SideNavService, public layoutService: LayoutService, public directionality : Directionality) { }
+  constructor(public sideNavService: SideNavService, public layoutService: LayoutService, public directionality: Directionality) { }
 
   ngOnInit() {
     this.sideNavService.isFullWidth$.subscribe(x => x ? setTimeout(() => this.showLinkText = x, 0) : this.showLinkText = x);

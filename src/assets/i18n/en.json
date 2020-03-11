@@ -39,9 +39,116 @@
   },
   "toolbar": {
     "accountMenu": {
-      "language":"Language",
+      "language": "Language",
       "notifications": "Notifications",
       "logout": "Loutout"
     }
+  },
+  "menu": {
+    "directories": [{
+        "title": "OncCard",
+        "icon": "help",
+        "pages": [{
+            "title": "OncCard",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "OncCard",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "OncCard",
+        "icon": "help",
+        "pages": [{
+            "title": "OncCard",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "OncCard",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "OncCard",
+        "icon": "help",
+        "pages": [{
+            "title": "OncCard",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "OncCard",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "OncCard",
+        "icon": "help",
+        "pages": [{
+            "title": "OncCard",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "OncCard",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "OncCard",
+        "icon": "help",
+        "pages": [{
+            "title": "OncCard",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "OncCard",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      }, {
+        "title": "OncCard",
+        "icon": "help",
+        "pages": [{
+            "title": "OncCard",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "OncCard",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "OncCard",
+        "icon": "help",
+        "pages": [{
+            "title": "OncCard",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "OncCard",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      }
+    ]
   }
 }

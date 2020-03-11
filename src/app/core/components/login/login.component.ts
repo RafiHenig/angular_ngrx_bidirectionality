@@ -4,10 +4,9 @@ import { AuthService } from '../../../shared/global/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpStatusCode } from '../../../shared/global/enums/httpError.enum';
 import { fade } from '../../../shared/global/animations/fade.animation';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { Observable, Subject } from 'rxjs';
-import {  takeUntil } from 'rxjs/operators';
-import { Language } from '../../../shared/global/vms';
+import { TranslateService } from '@ngx-translate/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { revealVertically } from '../../../shared/global/animations/reveal-rertically.animation';
 
 @Component({
@@ -20,7 +19,7 @@ import { revealVertically } from '../../../shared/global/animations/reveal-rerti
   ]
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private readonly distroy$ : Subject<boolean> = new Subject<boolean>();
+  private readonly distroy$: Subject<boolean> = new Subject<boolean>();
   public asyncErrorMessage?: string = undefined;
   public formGroup: FormGroup;
   public hide: boolean = true;
@@ -33,9 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     public translate: TranslateService
   ) { }
 
-  public languages: Language[] = [];
-  public currentLanguage: Language;
-
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -43,11 +39,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       rememberMe: [false]
     });
 
-    this.translate.get('languages').pipe(takeUntil(this.distroy$)).subscribe((x: Language[]) => {
-      this.languages = x;
-      this.currentLanguage = this.languages.find(y => y.code == this.translate.currentLang)
-    });
-    this.translate.onLangChange.pipe(takeUntil(this.distroy$)).subscribe((x: LangChangeEvent) => this.currentLanguage = this.languages.find(y => y.code == x.lang))
     this.formGroup.valueChanges.pipe(takeUntil(this.distroy$)).subscribe(() => this.asyncErrorMessage = undefined);
   }
 
@@ -55,10 +46,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   get email(): FormControl { return this.formGroup.get('email') as FormControl; }
   set passwordValue(value: string) { this.formGroup.get('password').setValue(value); }
   set emailValue(value: string) { this.formGroup.get('email').setValue(value); }
-
-  public changeLanguage = (x: Language): Observable<any> => {
-   return  this.translate.use(x.code);
-  }
 
   submit = (): void => {
     if (this.formGroup.invalid) return;
@@ -68,7 +55,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe({
         error: (e: HttpErrorResponse) => {
           this.isLoading = false;
-          switch (e.status) {
+          switch (e.status)
+          {
             case HttpStatusCode.UNAUTHORIZED: this.asyncErrorMessage = 'אחד מהפרטים אינם נכונים'; break;
             case HttpStatusCode.INTERNAL_SERVER_ERROR: this.asyncErrorMessage = 'שגיאת שרת, נסה שוב בעוד מספר דקות.'; break;
             default: this.asyncErrorMessage = this.asyncErrorMessage = "שגיאה התרחשה, נסה שוב"; break;

@@ -14,11 +14,7 @@ import { Language } from '../../../../shared/global/vms';
   styleUrls: ['./toolbar.component.scss'],
   animations: [rotationClockWise(180)]
 })
-export class ToolbarComponent implements OnInit {
-
-  languages: Language[];
-  currentLanguage : Language;
-
+export class ToolbarComponent {
   constructor(public layoutService: LayoutService,
     public sideNavService: SideNavService,
     public navTitleService: NavTitleService,
@@ -26,13 +22,4 @@ export class ToolbarComponent implements OnInit {
     public authService: AuthService,
     public translate: TranslateService
   ) { }
-
-  ngOnInit(): void {
-    this.translate.get('languages').subscribe((x: Language[]) => {
-      this.languages = x;
-      this.currentLanguage = x.find(y => y.code === this.translate.currentLang)
-    });
-    this.translate.onLangChange.subscribe((x : LangChangeEvent) => this.currentLanguage = this.languages.find(y => y.code === x.lang));
-  }
-  changeLanugage = (x: string) => this.translate.use(x)
 }

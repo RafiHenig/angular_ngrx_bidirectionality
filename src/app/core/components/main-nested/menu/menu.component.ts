@@ -6,6 +6,8 @@ import { rotationClockWise, rotationCounterClockWise } from '../../../../shared/
 import { Page, Directory } from '../../../../shared/global/vms';
 import { Directionality } from '@angular/cdk/bidi';
 import { revealVertically } from '../../../../shared/global/animations/reveal-rertically.animation';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -22,46 +24,15 @@ export class MenuComponent implements OnInit {
   public showLinkText: boolean = true;
   public opendDir: Directory;
 
-  public directories: Directory[] = [
-    {
-      title: 'כרטיס אחד', icon: 'help',
-      pages:
-        [
-          { title: 'כרטיס אחד', route: './', icon: 'help' },
-          { title: 'כרטיס אחד', route: './', icon: 'help' },
-        ]
-    },
-    {
-      title: 'כרטיס אחד', icon: 'help',
-      pages:
-        [
-          { title: 'כרטיס אחד', route: './', icon: 'help' },
-          { title: 'כרטיס אחד', route: './', icon: 'help' },
-        ]
-    },
-    {
-      title: 'כרטיס אחד', icon: 'help',
-      pages:
-        [
-          { title: 'כרטיס אחד', route: './', icon: 'help' },
-          { title: 'כרטיס אחד', route: './', icon: 'help' },
-        ]
-    },
-    {
-      title: 'כרטיס אחד', icon: 'help',
-      pages:
-        [
-          { title: 'כרטיס אחד', route: './', icon: 'help' },
-          { title: 'כרטיס אחד', route: './', icon: 'help' },
-        ]
-    },
-  ];
-
-  constructor(public sideNavService: SideNavService, public layoutService: LayoutService, public directionality: Directionality) { }
+  constructor(
+    public sideNavService: SideNavService,
+    public layoutService: LayoutService,
+    public directionality: Directionality,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.sideNavService.isFullWidth$.subscribe(x => x ? setTimeout(() => this.showLinkText = x, 0) : this.showLinkText = x);
-    this.directionality.value
   }
 
   public toggleWidth = (): void => this.sideNavService.toggleWidth();
@@ -69,6 +40,4 @@ export class MenuComponent implements OnInit {
   public dissmissSideNavIfSmall = (x: Page): void => {
     if (x.route && this.layoutService.isSmall) this.sideNavService.toggle();
   };
-
-  // public resetSelection = (name: string): void => this.pages.filter(x => x.name !== name).forEach(x => x.opened = false)
 }

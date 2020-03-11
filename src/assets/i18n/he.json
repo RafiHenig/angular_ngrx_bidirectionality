@@ -43,5 +43,112 @@
       "notifications": "התראות",
       "logout": "התנתק"
     }
+  },
+  "menu": {
+    "directories": [{
+        "title": "כרטיס אחד",
+        "icon": "help",
+        "pages": [{
+            "title": "כרטיס אחד",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "כרטיס אחד",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "כרטיס אחד",
+        "icon": "help",
+        "pages": [{
+            "title": "כרטיס אחד",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "כרטיס אחד",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "כרטיס אחד",
+        "icon": "help",
+        "pages": [{
+            "title": "כרטיס אחד",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "כרטיס אחד",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "כרטיס אחד",
+        "icon": "help",
+        "pages": [{
+            "title": "כרטיס אחד",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "כרטיס אחד",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "כרטיס אחד",
+        "icon": "help",
+        "pages": [{
+            "title": "כרטיס אחד",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "כרטיס אחד",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      }, {
+        "title": "כרטיס אחד",
+        "icon": "help",
+        "pages": [{
+            "title": "כרטיס אחד",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "כרטיס אחד",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      },
+      {
+        "title": "כרטיס אחד",
+        "icon": "help",
+        "pages": [{
+            "title": "כרטיס אחד",
+            "route": "./",
+            "icon": "help"
+          },
+          {
+            "title": "כרטיס אחד",
+            "rout": "./",
+            "icon": "help"
+          }
+        ]
+      }
+    ]
   }
 }

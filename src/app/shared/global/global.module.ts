@@ -15,10 +15,11 @@ import { BidiModule } from '@angular/cdk/bidi';
 import { NgSubscribeToDirective } from './directives/subscribe-to.directive';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { LanguagePipe } from './pipes/language.pipe';
 export const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
-  declarations: [NgSubscribeToDirective],
+  declarations: [NgSubscribeToDirective, LanguagePipe],
   imports: [
     BidiModule,
     TranslateModule.forRoot({
@@ -38,7 +39,8 @@ export const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(h
     FormsModule,
     NgProgressModule,
     NgProgressHttpModule,
-    BidiModule
+    BidiModule,
+    LanguagePipe
   ],
   providers: [
     LayoutService,

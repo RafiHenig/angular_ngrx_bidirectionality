@@ -3,7 +3,7 @@
 </div>
 
 <mat-nav-list>
-  <ng-container *ngFor="let dir of directories">
+  <ng-container *ngFor='let dir of (translate.stream("menu.directories") | async)'>
 
     <mat-list-item class="dir" [matTooltip]="dir.title"
       (click)="opendDir = opendDir == dir ? null : dir ; dissmissSideNavIfSmall(dir);">
@@ -12,9 +12,9 @@
 
       <span class="item-text spacer" [@shrinkExtendMenuLink]="showLinkText ? 'show' : 'hide'">{{ dir?.title }} </span>
 
-      <mat-icon class="arrow-forward" 
-      [@rotationCounterClockWise]="dir == opendDir && directionality.value == 'rtl'? 'open' : 'close'"
-      [@rotationClockWise]="dir == opendDir && directionality.value == 'ltr' ? 'open' : 'close'"
+      <mat-icon class="arrow-forward"
+        [@rotationCounterClockWise]="dir == opendDir && directionality.value == 'rtl'? 'open' : 'close'"
+        [@rotationClockWise]="dir == opendDir && directionality.value == 'ltr' ? 'open' : 'close'"
         [@shrinkExtendMenuLink]="showLinkText ? 'show' : 'hide'">
         {{ "symbols.arrow.forward" | translate }}
       </mat-icon>
@@ -23,12 +23,13 @@
 
     <div class="pages" *ngIf='dir == opendDir' @revealVertically>
 
-      <mat-list-item mat-list-item [routerLink]="subPage.route" routerLinkActive="active"
-        *ngFor="let subPage of dir.pages" (click)="dissmissSideNavIfSmall(subPage)" [matTooltip]="subPage.title">
+      <mat-list-item mat-list-item *ngFor="let subPage of dir.pages" [routerLink]="subPage.route"
+        routerLinkActive="active" (click)="dissmissSideNavIfSmall(subPage)" [matTooltip]="subPage.title">
 
         <mat-icon>{{subPage?.icon}}</mat-icon>
 
-        <span class="item-text spacer" [@shrinkExtendMenuLink]="showLinkText ? 'show' : 'hide'">{{ subPage?.title }} </span>
+        <span class="item-text spacer" [@shrinkExtendMenuLink]="showLinkText ? 'show' : 'hide'">{{ subPage?.title }}
+        </span>
 
       </mat-list-item>
     </div>

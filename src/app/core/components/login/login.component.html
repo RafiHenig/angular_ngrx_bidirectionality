@@ -48,8 +48,9 @@
 <div class="language">
   <div @revealVertically *ngIf="showLanguageSelectionMenu" class="drawer">
     <mat-form-field floatLabel='never'>
-      <mat-select [value]="currentLanguage?.code">
-        <mat-option *ngFor="let lang of languages" (click)="changeLanguage(lang)" [value]="lang.code">
+      <mat-select [value]="translate.currentLang">
+        <mat-option *ngFor="let lang of ('languages' | translate)" (click)="translate.use(lang.code)"
+          [value]="lang.code">
           {{lang.name}}
         </mat-option>
       </mat-select>
@@ -57,6 +58,6 @@
   </div>
   <button mat-button color="primary" (click)="showLanguageSelectionMenu = !showLanguageSelectionMenu">
     <mat-icon>language</mat-icon>
-    <span>{{currentLanguage?.name}}</span>
+    <span>{{(translate.currentLang | language | async)?.name}}</span>
   </button>
 </div>

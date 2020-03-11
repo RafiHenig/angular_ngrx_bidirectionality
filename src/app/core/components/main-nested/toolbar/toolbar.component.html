@@ -6,19 +6,16 @@
 
     <button class="toggle-menu-width" mat-icon-button *ngIf="!(layoutService.isSmall$ | async)"
       (click)="sideNavService.toggleWidth()">
-
       <mat-icon [@rotationClockWise]='(sideNavService.isFullWidth$ | async) ? "close" : "open"'>
         {{"symbols.arrow.back" | translate}}
       </mat-icon>
-
     </button>
 
     <h2>{{navTitleService.tilte$ | async | titlecase}}</h2>
-
     <span class="spacer"></span>
 
     <button class="account-info-switch" mat-icon-button [matMenuTriggerFor]="accountInfo"
-      [matMenuTriggerData]="{u : user, l : languages, c: currentLanguage}">
+      [matMenuTriggerData]="{$implicit : user}">
       {{user?.username | uppercase | slice : 0 : 1}}
     </button>
 
@@ -26,7 +23,7 @@
 </mat-toolbar>
 
 <mat-menu class="account-info" #accountInfo>
-  <ng-template matMenuContent let-user="u" let-languages="l" let-currentLanguag="c">
+  <ng-template matMenuContent let-user>
     <div class="user">
       <div class="user-icon">{{user?.username | uppercase | slice : 0 : 1}}</div>
       <div class="user-info">
@@ -36,9 +33,8 @@
     </div>
 
     <mat-divider></mat-divider>
-    
-    <button mat-menu-item [matMenuTriggerFor]="languageSelection"
-      [matMenuTriggerData]="{l : languages, c : currentLanguage }">
+
+    <button mat-menu-item [matMenuTriggerFor]="languageSelection">
       <mat-icon>language</mat-icon>
       <span>{{ "toolbar.accountMenu.language" | translate }}</span>
     </button>
@@ -58,9 +54,9 @@
 </mat-menu>
 
 <mat-menu class="language-selection" #languageSelection>
-  <ng-template matMenuContent let-languages="l" let-currentLanguage="c">
-    <button mat-menu-item *ngFor="let language of languages" (click)="changeLanugage(language.code)"
-      [class.active]="language.code == currentLanguage.code">
+  <ng-template matMenuContent>
+    <button mat-menu-item *ngFor="let language of ('languages' | translate)" (click)="translate.use(language.code)"
+      [class.active]="language.code == translate.currentLang">
       {{language.name}}
     </button>
   </ng-template>

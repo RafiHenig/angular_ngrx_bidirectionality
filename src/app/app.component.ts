@@ -10,7 +10,6 @@ import { Directionality, Direction } from '@angular/cdk/bidi';
 })
 export class AppComponent implements OnInit {
   constructor(private translate: TranslateService, private directionality: Directionality) {
-    translate.setDefaultLang('he');
     translate.use('he');
   }
 

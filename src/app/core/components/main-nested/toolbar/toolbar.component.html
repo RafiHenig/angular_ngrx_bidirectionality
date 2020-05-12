@@ -1,12 +1,12 @@
 <mat-toolbar>
-  <mat-toolbar-row *ngSubscribeTo="userStore | async as user">
-    <button class="toggle-menu-visibility" mat-icon-button (click)="sideNavService.toggle()">
+  <mat-toolbar-row *ngSubscribeTo="user$ | async as user">
+    <button class="toggle-menu-visibility" mat-icon-button (click)="toggle()">
       <mat-icon>menu</mat-icon>
     </button>
 
-    <button class="toggle-menu-width" mat-icon-button *ngIf="!(layoutService.isSmall$ | async)"
-      (click)="sideNavService.toggleWidth()">
-      <mat-icon [@rotationClockWise]='(sideNavService.isFullWidth$ | async) ? "close" : "open"'>
+    <button class="toggle-menu-width" mat-icon-button *ngIf="mediumOrLarger$ | async"
+      (click)="toggleWidth()">
+      <mat-icon [@rotationClockWise]='(expanded$ | async) ? "close" : "open"'>
         {{"symbols.arrow.back" | translate}}
       </mat-icon>
     </button>
@@ -44,7 +44,7 @@
       <span>{{ "toolbar.accountMenu.notifications" | translate }}</span>
     </button>
 
-    <button mat-menu-item (click)="authService.logOut()">
+    <button mat-menu-item (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
       <span>{{ "toolbar.accountMenu.logout" | translate }}</span>
     </button>

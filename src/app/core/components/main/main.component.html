@@ -1,19 +1,17 @@
 <ng-progress [spinner]="false"></ng-progress>
 
-<app-toolbar></app-toolbar>  
+<app-toolbar></app-toolbar>
 
 <mat-sidenav-container>
-  
-  <mat-sidenav [@shrinkExtendMenu]="(sideNavService.isFullWidth$ | async) ? 'open' : 'close'" 
-    [mode]="(layoutService.isSmall$ | async) ? 'over': 'side'" [opened]="sideNavService.isOpen$ | async"
-    (closed)="sideNavService.toggle(false)">
+
+  <mat-sidenav [opened]="show$ | async" [@shrinkExtendMenu]="(expanded$ | async) ? 'open':'close'" [mode]="(small$ | async) ? 'over':'side'">
     <app-menu></app-menu>
   </mat-sidenav>
 
-  <mat-sidenav-content 
-    [@shrinkExtendContentRTL]="(layoutService.isSmall$ | async) || directionality.value =='ltr' ? 'close' : (sideNavService.isOpen$ | async) ? (sideNavService.isFullWidth$ | async) ? 'extended' : 'open' : 'close'"
-    [@shrinkExtendContentLTR]="(layoutService.isSmall$ | async) || directionality.value =='rtl' ? 'close' : (sideNavService.isOpen$ | async) ? (sideNavService.isFullWidth$ | async) ? 'extended' : 'open' : 'close'">
+  <mat-sidenav-content
+    [@shrinkExtendContentRTL]="((small$ | async) || directionality.value =='ltr') ? 'close' : (show$ | async) ? (expanded$ | async) ? 'expanded' : 'open' : 'close'"
+    [@shrinkExtendContentLTR]="((small$ | async) || directionality.value =='rtl') ? 'close' : (show$ | async) ? (expanded$ | async) ? 'expanded' : 'open' : 'close'">
     <app-content></app-content>
   </mat-sidenav-content>
-  
+
 </mat-sidenav-container>

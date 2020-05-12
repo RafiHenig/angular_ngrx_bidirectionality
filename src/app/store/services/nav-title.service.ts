@@ -1,7 +1,9 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NavTitleService {
   private titleSource: BehaviorSubject<string> = new BehaviorSubject<string>("OneCard");
   public tilte$: Observable<string> = this.titleSource.asObservable();

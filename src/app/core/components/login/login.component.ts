@@ -1,13 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AuthService } from '../../../shared/global/services/auth.service';
+import { Store, select } from '@ngrx/store';
+import { AuthService } from '../../../store/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpStatusCode } from '../../../shared/global/enums/httpError.enum';
 import { fade } from '../../../shared/global/animations/fade.animation';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { revealVertically } from '../../../shared/global/animations/reveal-rertically.animation';
+import { AppState } from '../../../store/reducers';
+import { LogInAction, InputChangeAction } from '../../../store/actions/auth.actions';
+import { getErrorMessage, getLoading } from '../../../store/selectors/auth.selectors';
 
 @Component({
   selector: 'app-login',
@@ -20,15 +24,15 @@ import { revealVertically } from '../../../shared/global/animations/reveal-rerti
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private readonly distroy$: Subject<boolean> = new Subject<boolean>();
-  public asyncErrorMessage?: string = undefined;
+  public errorMessage$: Observable<string>;
+  public isLoading$: Observable<boolean>;
   public formGroup: FormGroup;
   public hide: boolean = true;
-  public isLoading: boolean = false;
   public showLanguageSelectionMenu: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    private store: Store<AppState>,
     public translate: TranslateService
   ) { }
 
@@ -39,7 +43,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       rememberMe: [false]
     });
 
-    this.formGroup.valueChanges.pipe(takeUntil(this.distroy$)).subscribe(() => this.asyncErrorMessage = undefined);
+    this.formGroup.valueChanges.pipe(takeUntil(this.distroy$)).subscribe(() => this.store.dispatch(new InputChangeAction()));
+
+    this.errorMessage$ = this.store.pipe(select(getErrorMessage));
+    this.isLoading$ = this.store.pipe(select(getLoading));
   }
 
   get password(): FormControl { return this.formGroup.get('password') as FormControl; }
@@ -49,20 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submit = (): void => {
     if (this.formGroup.invalid) return;
-    this.isLoading = true;
-    this.authService
-      .logIn(this.formGroup.value)
-      .subscribe({
-        error: (e: HttpErrorResponse) => {
-          this.isLoading = false;
-          switch (e.status)
-          {
-            case HttpStatusCode.UNAUTHORIZED: this.asyncErrorMessage = 'אחד מהפרטים אינם נכונים'; break;
-            case HttpStatusCode.INTERNAL_SERVER_ERROR: this.asyncErrorMessage = 'שגיאת שרת, נסה שוב בעוד מספר דקות.'; break;
-            default: this.asyncErrorMessage = this.asyncErrorMessage = "שגיאה התרחשה, נסה שוב"; break;
-          }
-        }
-      });
+    this.store.dispatch(new LogInAction(this.formGroup.value));
   }
 
   ngOnDestroy(): void {

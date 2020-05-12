@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from '../../../../shared/global/services/layout.service';
-import { SideNavService } from '../../../../shared/global/services/sidenav.service';
-import { NavTitleService } from '../../../../shared/global/services/nav-title.service';
-import { UserStore } from '../../../../shared/store/stores/models/user.store';
-import { AuthService } from '../../../../shared/global/services/auth.service';
+import { NavTitleService } from '../../../../store/services/nav-title.service';
+import { AuthService } from '../../../../store/services/auth.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { rotationClockWise } from '../../../../shared/global/animations/rotation.animation';
-import { Language } from '../../../../shared/global/vms';
+import { AppState } from '../../../../store/reducers';
+import { Store, select } from '@ngrx/store';
+import { LogOutAction } from '../../../../store/actions/auth.actions';
+import { Observable } from 'rxjs';
+import { User } from '../../../../store/reducers/auth.reducer';
+import { getUser } from '../../../../store/selectors/auth.selectors';
+import { getShowSideNav, getSideNavExpanded, getSmall, getMediumOrLarger } from '../../../../store/selectors/layout.selectors';
+import { ToggleSideNavWidthAction, ToggleSideNavAction } from '../../../../store/actions/layout.actions';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,12 +18,28 @@ import { Language } from '../../../../shared/global/vms';
   styleUrls: ['./toolbar.component.scss'],
   animations: [rotationClockWise(180)]
 })
-export class ToolbarComponent {
-  constructor(public layoutService: LayoutService,
-    public sideNavService: SideNavService,
+export class ToolbarComponent implements OnInit {
+  public user$: Observable<User>;
+  public show$: Observable<boolean>;
+  public expanded$: Observable<boolean>;
+  public small$: Observable<boolean>;
+  public mediumOrLarger$: Observable<boolean>;
+
+  constructor(
     public navTitleService: NavTitleService,
-    public userStore: UserStore,
-    public authService: AuthService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private store: Store<AppState>,
   ) { }
+
+  ngOnInit(): void {
+    this.user$ = this.store.pipe(select(getUser));
+    this.show$ = this.store.pipe(select(getShowSideNav));
+    this.expanded$ = this.store.pipe(select(getSideNavExpanded));
+    this.small$ = this.store.pipe(select(getSmall));
+    this.mediumOrLarger$ = this.store.pipe(select(getMediumOrLarger));
+  }
+
+  public readonly logout = () => this.store.dispatch(new LogOutAction());
+  public readonly toggleWidth = () => this.store.dispatch(new ToggleSideNavWidthAction());
+  public readonly toggle = () => this.store.dispatch(new ToggleSideNavAction());
 }

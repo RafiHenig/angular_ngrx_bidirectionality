@@ -24,6 +24,7 @@
       color: $primary;
       //border-top: solid 1px $item-devider-color;
       border-top: solid 5px $gray-background;
+      box-sizing: content-box;
     }
 
     .pages {

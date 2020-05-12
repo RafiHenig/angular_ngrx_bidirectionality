@@ -11,7 +11,7 @@ export const shrinkExtendContentRTL = trigger('shrinkExtendContentRTL', [
       'margin-right': '48px'
     })
   ),
-  state('extended',
+  state('expanded',
     style({
       'margin-right': '300px'
     })
@@ -30,7 +30,7 @@ export const shrinkExtendContentLTR = trigger('shrinkExtendContentLTR', [
       'margin-left': '48px'
     })
   ),
-  state('extended',
+  state('expanded',
     style({
       'margin-left': '300px'
     })
@@ -52,7 +52,7 @@ export const shrinkExtendContentLTR = trigger('shrinkExtendContentLTR', [
 //       'margin-inline-start': '48px'
 //     })
 //   ),
-//   state('extended',
+//   state('expanded',
 //     style({
 //       'margin': '0',
 //       'margin-inline-start': '300px'

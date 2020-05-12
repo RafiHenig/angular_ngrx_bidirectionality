@@ -1,7 +1,8 @@
 <ng-progress [spinner]="false"></ng-progress>
 
-<form tabindex="1" (focus)="showLanguageSelectionMenu = false" [formGroup]="formGroup" (keydown.enter)="submit()">
-  <small class="async-error-message" [@fade] *ngIf="asyncErrorMessage">{{asyncErrorMessage}}</small>
+<form tabindex="1" *ngSubscribeTo="errorMessage$ | async as errorMessage" (focus)="showLanguageSelectionMenu = false"
+  [formGroup]="formGroup" (keydown.enter)="submit()">
+  <small class="async-error-message" @fade *ngIf="errorMessage">{{errorMessage}}</small>
 
   <div class="logo">
     <img src="../../../../assets/OneCard-logo.png">
@@ -39,8 +40,8 @@
   </div>
 
   <div class="button-wrapper"
-    [matTooltip]="(asyncErrorMessage || formGroup.invalid) ?  ('login.invalidForm' | translate) : ''">
-    <button class="login" [disabled]="asyncErrorMessage || formGroup.invalid || isLoading" mat-raised-button
+    [matTooltip]="(errorMessage || formGroup.invalid) ?  ('login.invalidForm' | translate) : ''">
+    <button class="login" [disabled]="errorMessage || formGroup.invalid || (isLoading$ | async)" mat-raised-button
       (click)="submit()" color="primary">{{"login.login" | translate}}</button>
   </div>
 </form>
@@ -58,6 +59,6 @@
   </div>
   <button mat-button color="primary" (click)="showLanguageSelectionMenu = !showLanguageSelectionMenu">
     <mat-icon>language</mat-icon>
-    <span>{{(translate.currentLang | language | async)?.name}}</span>
+    <span>{{ "language" | translate}}</span>
   </button>
 </div>

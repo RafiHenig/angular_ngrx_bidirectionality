@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
-import { LayoutService } from '../../../shared/global/services/layout.service';
-import { SideNavService } from '../../../shared/global/services/sidenav.service';
-import { shrinkExtendContentLTR,shrinkExtendContentRTL } from '../../animations/shrink-extend-content.animation';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { shrinkExtendContentLTR, shrinkExtendContentRTL } from '../../animations/shrink-extend-content.animation';
 import { shrinkExtendMenu } from '../../animations/shrink-extend-menu.animation';
 import { Directionality } from '@angular/cdk/bidi';
+import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
+import { AppState } from '../../../store/reducers';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { getShowSideNav, getSideNavExpanded, getSmall } from '../../../store/selectors/layout.selectors';
 
 @Component({
   selector: 'app-main',
@@ -15,10 +18,20 @@ import { Directionality } from '@angular/cdk/bidi';
     shrinkExtendMenu
   ]
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
+  public show$: Observable<boolean>;
+  public expanded$: Observable<boolean>;
+  public small$: Observable<boolean>;
+
   constructor(
-    public layoutService: LayoutService,
-     public sideNavService: SideNavService,
-     public directionality : Directionality
-    ) { }
+    public store: Store<AppState>,
+    public directionality: Directionality
+  ) { }
+
+  ngOnInit(): void {
+    this.show$ = this.store.pipe(select(getShowSideNav));
+    this.expanded$ = this.store.pipe(select(getSideNavExpanded));
+    this.small$ = this.store.pipe(select(getSmall));
+  }
+
 }
